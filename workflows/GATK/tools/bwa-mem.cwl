@@ -7,6 +7,9 @@ requirements:
 - $import: envvar-global.yml
 - $import: bwa-docker.yml
 - class: InlineJavascriptRequirement
+- class: ResourceRequirement
+  coresMin: 4
+  ramMin: 16000
 
 inputs:
   minimum_seed_length:

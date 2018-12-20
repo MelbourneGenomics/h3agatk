@@ -167,10 +167,6 @@ outputs:
     type: File
     outputSource: MarkDuplicates/markDups_output
 
-  MarkDuplicates_output_index:
-    type: File
-    outputSource: MarkDuplicates/markDups_output_index
-
   output_realignTarget:
     type: File
     outputSource: RealignTarget/output_realignTarget
@@ -194,14 +190,14 @@ outputs:
 steps:
 
   create-dict:
-    run: ../../tools/picard-CreateSequenceDictionary.cwl  # FIXME: this is draft3
+    run: tools/picard-CreateSequenceDictionary.cwl  # FIXME: this is draft3
     in:
       reference: reference
       output_filename: output_RefDictionaryFile
     out: [ output ]
 
   bwa-mem:
-    run: ../../tools/bwa-mem.cwl
+    run: tools/bwa-mem.cwl
     in:
       reference: reference
       reads: reads
@@ -212,7 +208,7 @@ steps:
     out: [ output ]
 
   samtools-view:
-    run: ../../tools/samtools-view.cwl
+    run: tools/samtools-view.cwl
     in:
       input: bwa-mem/output
       isbam: samtools-view-isbam
@@ -222,7 +218,7 @@ steps:
     out: [ output ]
 
   samtools-sort:
-    run: ../../tools/samtools-sort.cwl
+    run: tools/samtools-sort.cwl
     in:
       input: samtools-view/output
       output_name: output_samtools-sort
@@ -230,20 +226,20 @@ steps:
     out: [ sorted ]
 
   samtools-index:
-    run: ../../tools/samtools-index.cwl
+    run: tools/samtools-index.cwl
     in:
       input: samtools-sort/sorted
       bai: samtools-index-bai
     out: [ index ]
 
   bamstat:
-    run: ../../tools/bamstat.cwl
+    run: tools/bamstat.cwl
     in:
       bam_input: samtools-sort/sorted
     out: [ bamstats_report ]
 
 #  DepthOfCoverage:
-#    run: ../../tools/GATK-DepthOfCoverage.cwl
+#    run: tools/GATK-DepthOfCoverage.cwl
 #    in:
 #      omitIntervalStatistics: depth_omitIntervalStatistics
 #      omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
@@ -254,7 +250,7 @@ steps:
 #    out: [ output_DepthOfCoverage ]
 
   MarkDuplicates:
-    run: ../../tools/picard-MarkDuplicates.cwl
+    run: tools/picard-MarkDuplicates.cwl
     in:
       outputFileName_markDups: outputFileName_MarkDuplicates
       inputFileName_markDups:
@@ -264,10 +260,10 @@ steps:
       readSorted: readSorted_MarkDuplicates
       removeDuplicates: removeDuplicates_MarkDuplicates
       createIndex: createIndex_MarkDuplicates
-    out: [ markDups_output, markDups_output_index ]
+    out: [ markDups_output ]
 
   RealignTarget:
-    run: ../../tools/GATK-RealignTargetCreator.cwl
+    run: tools/GATK-RealignTargetCreator.cwl
     in:
       outputfile_realignTarget: outputFileName_RealignTargetCreator
       inputBam_realign: MarkDuplicates/markDups_output
@@ -277,7 +273,7 @@ steps:
     out: [ output_realignTarget ]
 
   IndelRealigner:
-    run: ../../tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
+    run: tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
     in:
       outputfile_indelRealigner: outputFileName_IndelRealigner
       inputBam_realign: MarkDuplicates/markDups_output
@@ -287,7 +283,7 @@ steps:
     out: [ output_indelRealigner ]
 
   BaseRecalibrator:
-    run: ../../tools/GATK-BaseRecalibrator.cwl
+    run: tools/GATK-BaseRecalibrator.cwl
     in:
       outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
       inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
@@ -298,7 +294,7 @@ steps:
     out: [ output_baseRecalibrator ]
 
   PrintReads:
-    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
+    run: tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
     in:
       outputfile_printReads: outputFileName_PrintReads
       inputBam_printReads: IndelRealigner/output_indelRealigner
@@ -308,7 +304,7 @@ steps:
     out: [ output_printReads ]
 
   HaplotypeCaller:
-    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
+    run: tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
     in:
       outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
       inputBam_HaplotypeCaller: PrintReads/output_printReads

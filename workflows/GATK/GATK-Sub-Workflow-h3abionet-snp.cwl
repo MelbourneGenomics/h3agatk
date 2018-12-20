@@ -56,7 +56,7 @@ outputs:
 steps:
 
   vqsr_snps:
-    run: ../../tools/GATK-VariantRecalibrator-SNPs.cwl
+    run: tools/GATK-VariantRecalibrator-SNPs.cwl
     in:
       haplotypecaller_snps_vcf: haplotest_vcf
       reference: reference
@@ -66,7 +66,7 @@ steps:
     out: [tranches_File, recal_File]
 
   apply_recalibration_snps:
-    run: ../../tools/GATK-ApplyRecalibration.cwl
+    run: tools/GATK-ApplyRecalibration.cwl
     in:
       #raw_vcf: HaplotypeCaller/output_HaplotypeCaller
       raw_vcf: haplotest_vcf
@@ -77,7 +77,7 @@ steps:
     out: [ vqsr_vcf ]
 
   snpeff_snps:
-    run: ../../tools/snpEff.cwl
+    run: tools/snpEff.cwl
     in:
       genome: snpf_genome
       variant_calling_file: apply_recalibration_snps/vqsr_vcf

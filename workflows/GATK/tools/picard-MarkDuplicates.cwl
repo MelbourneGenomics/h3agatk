@@ -66,6 +66,9 @@ requirements:
 - $import: envvar-global.yml
 - $import: picard-docker.yml
 - class: InlineJavascriptRequirement
+- class: ResourceRequirement
+  coresMin: 2
+  ramMin: 8000
 
 inputs:
   comment:
@@ -230,10 +233,8 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputFileName_markDups)
-  markDups_output_index:
-    type: File
-    outputBinding:
-      glob: $("*.bai")
+    secondaryFiles:
+    - ^.bai
 
 baseCommand: [java]
 arguments:

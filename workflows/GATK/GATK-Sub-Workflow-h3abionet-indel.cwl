@@ -56,7 +56,7 @@ outputs:
 steps:
 
   vqsr_indels:
-    run: ../../tools/GATK-VariantRecalibrator-Indels.cwl
+    run: tools/GATK-VariantRecalibrator-Indels.cwl
     in:
       #haplotypecaller_snps_vcf: HaplotypeCaller/output_HaplotypeCaller
       haplotypecaller_snps_vcf: haplotest_vcf
@@ -69,7 +69,7 @@ steps:
     out: [tranches_File, recal_File]
 
   apply_recalibration_indels:
-    run: ../../tools/GATK-ApplyRecalibration.cwl
+    run: tools/GATK-ApplyRecalibration.cwl
     in:
       mode: indel_mode
       #raw_vcf: HaplotypeCaller/output_HaplotypeCaller
@@ -80,7 +80,7 @@ steps:
     out: [ vqsr_vcf ]
 
   snpeff_indels:
-    run: ../../tools/snpEff.cwl
+    run: tools/snpEff.cwl
     in:
       genome: snpf_genome
       variant_calling_file: apply_recalibration_indels/vqsr_vcf

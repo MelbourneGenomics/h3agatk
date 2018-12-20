@@ -31,6 +31,11 @@ hints:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
+requirements:
+- class: ResourceRequirement
+  coresMin: 2
+  ramMin: 8000
+
 inputs:
   haplotypecaller_snps_vcf:
     type: File

@@ -14,13 +14,13 @@
 #- http://www.w3.org/ns/adms#
 #- http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 class: CommandLineTool
 
 #adms:includedAsset:
 ##  doap:name: "picard"
-#  doap:description: >
+#  doap:doc: >
 #    A set of Java command line tools for manipulating high-throughput sequencing data (HTS) data and formats.
 #    Picard is implemented using the HTSJDK Java library HTSJDK, supporting accessing of common file formats,
 #    such as SAM and VCF, used for high-throughput sequencing data.
@@ -39,7 +39,7 @@ class: CommandLineTool
 #  - class: foaf:Organization
 #    foaf:name: "Broad Institute"
 
-description: |
+doc: |
   picard-CreateSequenceDictionary.cwl is developed for CWL consortium
   Read fasta or fasta.gz containing reference sequences, and write as a SAM or BAM file with only sequence dictionary.
 
@@ -64,7 +64,7 @@ requirements:
 inputs:
 - id: "reference"
   type: File
-  description: |
+  doc: |
     Input reference fasta or fasta.gz
   inputBinding:
     prefix: "REFERENCE="
@@ -73,7 +73,7 @@ inputs:
 
 - id: "output_filename"
   type: string
-  description: |
+  doc: |
     Output SAM or BAM file containing only the sequence dictionary
   inputBinding:
     prefix: "OUTPUT="
@@ -82,7 +82,7 @@ inputs:
 
 - id: "GENOME_ASSEMBLY"
   type: ["null",string]
-  description: |
+  doc: |
     Put into AS field of sequence dictionary entry if supplied
   inputBinding:
     prefix: "GENOME_ASSEMBLY="
@@ -91,7 +91,7 @@ inputs:
 
 - id: "URI"
   type: ["null",string]
-  description: |
+  doc: |
     Put into UR field of sequence dictionary entry.
     If not supplied, input reference file is used
   inputBinding:
@@ -101,7 +101,7 @@ inputs:
 
 - id: "SPECIES"
   type: ["null",string]
-  description: |
+  doc: |
     Put into SP field of sequence dictionary entry
   inputBinding:
     prefix: "SPECIES="
@@ -110,7 +110,7 @@ inputs:
 
 - id: "TRUNCATE_NAMES_AT_WHITESPACE"
   type: ["null",boolean]
-  description: |
+  doc: |
     Make sequence name the first word from the > line in the fasta file.  By default the
     entire contents of the > line is used, excluding leading and trailing whitespace.
     Default value: true. This option can be set to 'null' to clear the default value.
@@ -122,7 +122,7 @@ inputs:
 
 - id: "NUM_SEQUENCES"
   type: ["null",int]
-  description: |
+  doc: |
     Stop after writing this many sequences.  For testing.
     Default value: 2147483647.
   inputBinding:
@@ -133,7 +133,7 @@ inputs:
 outputs:
 - id: "#output"
   type: File
-  description: >
+  doc: >
     Output SAM or BAM file containing only the sequence dictionary Required.
   outputBinding:
     glob: $(inputs.output_filename)
