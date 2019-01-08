@@ -74,7 +74,7 @@ outputs:
 steps:
 
   select_indels:
-    run: ../../tools/GATK-SelectVariants.cwl
+    run: tools/GATK-SelectVariants.cwl
     in:
       gatk_jar: gatk_jar
       raw_vcf: haplotest_vcf
@@ -84,7 +84,7 @@ steps:
     out: [output_File]
 
   filter_indels:
-    run: ../../tools/GATK-VariantFiltration.cwl
+    run: tools/GATK-VariantFiltration.cwl
     in:
       gatk_jar: gatk_jar
       indels_vcf: select_indels/output_File
@@ -94,7 +94,7 @@ steps:
     out: [ output_File ]
 
   snpeff_indels:
-    run: ../../tools/snpEff.cwl
+    run: tools/snpEff.cwl
     in:
       genome: snpf_genome
       variant_calling_file: filter_indels/output_File

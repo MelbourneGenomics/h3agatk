@@ -165,7 +165,8 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputfile_printReads)
-
+    secondaryFiles:
+    - ^.bai
 
 arguments:
 - valueFrom: ./test/test-files

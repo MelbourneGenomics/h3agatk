@@ -4,6 +4,10 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+requirements:
+- class: ResourceRequirement
+  coresMin: 2
+  ramMin: 8000
 
 doc: |
       GATK-VariantsRecalibrator.cwl is developed for CWL consortium

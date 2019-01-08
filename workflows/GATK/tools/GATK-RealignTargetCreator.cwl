@@ -70,6 +70,11 @@ class: CommandLineTool
 requirements:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
+- class: ResourceRequirement
+  coresMin: 2
+  ramMin: 8000
+  tmpdirMin: 100000
+  outdirMin: 100000
 
 inputs:
   gatk_jar:

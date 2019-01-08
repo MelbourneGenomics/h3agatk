@@ -8,6 +8,11 @@ hints:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
+requirements:
+- class: ResourceRequirement
+  coresMin: 2
+  ramMin: 8000
+
 inputs:
   gatk_jar:
     type: File
