@@ -74,6 +74,8 @@ requirements:
 - class: ResourceRequirement
   coresMin: 2
   ramMin: 8000
+  tmpdirMin: 100000
+  outdirMin: 100000
 
 inputs:
   inputBam_realign:
@@ -200,6 +202,8 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputfile_indelRealigner)
+    secondaryFiles:
+    - ^.bai
 
 arguments:
 - valueFrom: ./test/test-files

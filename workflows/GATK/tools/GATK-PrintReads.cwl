@@ -78,8 +78,6 @@ inputs:
     inputBinding:
       position: 11
 
-
-
   reference:
     type: File
     inputBinding:
@@ -161,7 +159,8 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputfile_printReads)
-
+    secondaryFiles:
+    - ^.bai
 
 arguments:
 - valueFrom: ./test/test-files

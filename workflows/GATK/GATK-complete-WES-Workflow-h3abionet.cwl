@@ -4,9 +4,9 @@ class: Workflow
 cwlVersion: v1.0
 
 requirements:
-  - class: StepInputExpressionRequirement
-  - class: InlineJavascriptRequirement
-  - class: SubworkflowFeatureRequirement
+- class: StepInputExpressionRequirement
+- class: InlineJavascriptRequirement
+- class: SubworkflowFeatureRequirement
 
 doc: |
   # H3ABioNet GATK Germline Workflow
@@ -220,9 +220,9 @@ inputs:
 
 outputs:
 
-  output_bamstat:
-    type: File
-    outputSource: HaplotypeCaller/output_bamstat
+#  output_bamstat:
+#    type: File
+#    outputSource: HaplotypeCaller/output_bamstat
 
   output_printReads:
     type: File
@@ -280,7 +280,10 @@ steps:
       depth_omitIntervalStatistics: depth_omitIntervalStatistics
       depth_omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
       depth_outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
-    out: [ output_bamstat, output_printReads, output_HaplotypeCaller ]
+    out:
+#      - output_bamstat
+      - output_printReads
+      - output_HaplotypeCaller
 
   SnpVQSR:
     run: GATK-Sub-Workflow-h3abionet-snp.cwl

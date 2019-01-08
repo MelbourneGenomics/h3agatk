@@ -73,6 +73,8 @@ requirements:
 - class: ResourceRequirement
   coresMin: 2
   ramMin: 8000
+  tmpdirMin: 100000
+  outdirMin: 100000
 
 inputs:
   maxIntervalSize:

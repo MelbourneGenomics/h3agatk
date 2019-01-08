@@ -149,9 +149,9 @@ outputs:
     type: File
     outputSource: samtools-sort/sorted
 
-  output_bamstat:
-    type: File
-    outputSource: bamstat/bamstats_report
+#  output_bamstat:
+#    type: File
+#    outputSource: bamstat/bamstats_report
 
 #  output_DepthOfCoverage:
 #    type:
@@ -232,11 +232,11 @@ steps:
       bai: samtools-index-bai
     out: [ index ]
 
-  bamstat:
-    run: tools/bamstat.cwl
-    in:
-      bam_input: samtools-sort/sorted
-    out: [ bamstats_report ]
+#  bamstat:
+#    run: tools/bamstat.cwl
+#    in:
+#      bam_input: samtools-sort/sorted
+#    out: [ bamstats_report ]
 
 #  DepthOfCoverage:
 #    run: tools/GATK-DepthOfCoverage.cwl
