@@ -58,22 +58,32 @@
   "resource_hapmap": {
     "class": "File",
     "path": "gs://genovic-test-data/hg19/HapMap/hapmap_3.3.hg19.sites.vcf.gz",
-      "secondaryFiles": [
-        {
-          "class": "File",
-          "path": "gs://genovic-test-data/hg19/HapMap/hapmap_3.3.hg19.sites.vcf.gz.tbi"
-        }
-      ]
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "path": "gs://genovic-test-data/hg19/HapMap/hapmap_3.3.hg19.sites.vcf.gz.tbi"
+      }
+    ]
   },
   "resource_mills": {
+    "path": "gs://genovic-test-data/hg19/MillsAnd1000g/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz",
+    "class": "File",
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "path": "gs://genovic-test-data/hg19/MillsAnd1000g/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz.tbi"
+      }
+    ]
+  },
+  "resource_1kg": {
     "path": "gs://genovic-test-data/hg19/1000g/1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz",
     "class": "File",
-      "secondaryFiles": [
-        {
-          "class": "File",
-          "path": "gs://genovic-test-data/hg19/1000g/1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz.tbi"
-        }
-      ]
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "path": "gs://genovic-test-data/hg19/1000g/1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz.tbi"
+      }
+    ]
   },
   "covariate": [
     "CycleCovariate",
@@ -82,12 +92,12 @@
   "dbsnp": {
     "path": "gs://genovic-test-data/hg19/dbSNP/dbsnp_138.hg19.vcf.gz",
     "class": "File",
-      "secondaryFiles": [
-        {
-          "class": "File",
-          "path": "gs://genovic-test-data/hg19/dbSNP/dbsnp_138.hg19.vcf.gz.tbi"
-        }
-      ]
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "path": "gs://genovic-test-data/hg19/dbSNP/dbsnp_138.hg19.vcf.gz.tbi"
+      }
+    ]
   },
   "tmpdir": "./tmp",
   "readSorted_MarkDuplicates": "true",
@@ -100,6 +110,10 @@
   "outputFileName_RealignTargetCreator": "RealignTargetCreator-2017-04-23.intervals",
   "reference": {
     "path": "gs://genovic-test-data/hg19/ReferenceGenome/default_unzipped/ucsc.hg19.fasta",
+    "class": "File"
+  },
+  "gatk_jar": {
+    "path": "gs://genovic-test-data/hg19/GenomeAnalysisTK-3.5-0.jar",
     "class": "File"
   },
   "snpf_genome": "hg19",
@@ -134,5 +148,6 @@
   },
   "removeDuplicates_MarkDuplicates": "true",
   "samtools_threads": 4,
-  "filter_expression": "'QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0'"
+  "filter_expression": "'QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0'",
+  "snpeff_java_mem_opts": ["-Xmx4G", "-Xms2G"]
 }
